@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+
+</head>
+<body>
+<main>
+  <div class="d-flex justify-content-center align-items-center">
+    <a th:href="@{/employee/lista}" class="btn btn-outline-primary me-2">Empleados</a>
+    <a th:href="@{/}" class="btn btn-outline-primary me-2">Historial</a>
+    <a th:href="@{/}" class="btn btn-outline-primary me-2">Reportes</a>
+  </div>
+  <div class="container px-4 py-5">
+    <h1 class="pb-2 border-bottom">Lista de Empleados</h1>
+    <form method="post" th:action="@{/employee/buscarPorNombre}">
+      <div class="input-group mb-3">
+        <input name="searchField" class="form-control" type="text" placeholder="Buscar por nombre" th:value="${textoBuscado}" >
+        <button class="btn btn-primary" type="submit">Buscar</button>
+        <a class="btn btn-outline-secondary" th:href="@{/employee}">Limpiar</a>
+      </div>
+    </form>
+    <table class="table table-sm">
+      <tr>
+        <th># de usuario:</th>
+        <th>Nombre: </th>
+        <th>Apellido:</th>
+        <th>Puesto:</th>
+        <th>Departamento:</th>
+        <th>Salario:</th>
+        <th></th>
+      </tr>
+      <tr th:each="employee, info : ${lista}">
+        <td th:text="${employee.employee_id}"></td>
+        <td th:text="${employee.first_name}"></td>
+        <td th:text="${employee.last_name}"></td>
+        <td th:text="${employee.job_id}"></td>
+        <td th:text="${employee.department_id}"></td>
+        <td th:text="${employee.salary}"></td>
+        <td><a class="btn btn-primary" th:href="@{'/employee/edit?id=' + ${employee.employee_id}}">Editar</a>
+        </td>
+      </tr>
+    </table>
+  </div>
+</main>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+
+</html>
